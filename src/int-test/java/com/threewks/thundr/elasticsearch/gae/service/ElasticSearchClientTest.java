@@ -17,13 +17,11 @@
  */
 package com.threewks.thundr.elasticsearch.gae.service;
 
+import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import org.elasticsearch.common.settings.ImmutableSettings;
-import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
-import org.elasticsearch.node.NodeBuilder;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -45,10 +43,7 @@ public class ElasticSearchClientTest {
 
 	@BeforeClass
 	public static void beforeClass() {
-		Settings settings = ImmutableSettings.settingsBuilder()
-				.put("index.store.type", "memory")
-				.put("path.data", "target/elasticsearch/data").build();
-		node = NodeBuilder.nodeBuilder().loadConfigSettings(false).local(true).settings(settings).node().start();
+		node = nodeBuilder().local(true).node();
 
 		ElasticSearchConfig config = new ElasticSearchConfig();
 		config.setUrl("http://localhost:9200");
