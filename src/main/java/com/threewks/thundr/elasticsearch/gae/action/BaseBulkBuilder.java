@@ -17,17 +17,17 @@
  */
 package com.threewks.thundr.elasticsearch.gae.action;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import com.google.gson.GsonBuilder;
 import com.threewks.thundr.logger.Logger;
+
+import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public abstract class BaseBulkBuilder<T, B> extends BaseBuilder<T, B> {
 	protected GsonBuilder gsonBuilder = new GsonBuilder();
 	protected String path = "/_bulk";
-	protected Map<String, Object> documents = new LinkedHashMap<String, Object>();
+	protected Map<String, Object> documents = Maps.newLinkedHashMap();
 
 	@Override
 	public B id(String id) {

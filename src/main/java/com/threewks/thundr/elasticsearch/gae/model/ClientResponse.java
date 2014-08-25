@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -90,7 +91,7 @@ public class ClientResponse {
 	public <T> List<T> getSourceAsListOfType(Class<T> type) {
 		String source = getSourceAsJson();
 		if (source == null) {
-			return new ArrayList<T>();
+			return Lists.newArrayList();
 		}
 		return gson.fromJson(source, new ListOfType<T>(type));
 	}
@@ -103,7 +104,7 @@ public class ClientResponse {
 	 * @return a list of results.
 	 */
 	public <T> List<T> getHitsAsType(Class<T> type) {
-		List<T> hits = new ArrayList<T>();
+		List<T> hits = Lists.newArrayList();
 		if (!jsonObject.has("hits")) {
 			return hits;
 		}
